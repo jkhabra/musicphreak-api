@@ -1,19 +1,23 @@
-import Express from 'express';
-import songs from './songs';
-import artists from './artists'
+import Express from "express";
+import songs from "./songs";
+import artists from "./artists";
+const bodyParser = require("body-parser");
 
 const app = Express();
 
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 const port = process.env.PORT || 3000;
 
-app.set('env', process.env.NODE_ENV || 'development')
+app.set("env", process.env.NODE_ENV || "development");
 
-app.get('/', (req, res) => {
-    res.send('Hello world');
+app.get("/", (req, res) => {
+    res.send("Hello world");
 });
 
-app.use('/songs', songs);
-app.use('/artists', artists)
+app.use("/songs", songs);
+app.use("/artists", artists);
 
 /**
  * Start Express server.

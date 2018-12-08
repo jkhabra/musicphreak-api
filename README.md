@@ -9,6 +9,6 @@ MusicPhreak is a music streaming platform and online music streaming application
 
 ## Install dependencies to use this application
 - Installation is done using the `npm install command:`
-'''
+``` shell
 $ npm install -g express-generator@4
-'''
+```
