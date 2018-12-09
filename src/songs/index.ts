@@ -17,10 +17,13 @@ routes.get("/:id", async(req, res) => {
 });
 
 routes.get("/", async (req, res) => {
-    const result = await db.query("select * from musicphreak.song");
+    const qua = req.param("quality");
+    const q = typeof qua !== "undefined" ? qua : "48";
+
+    const result = await db.query("SELECT song.id, song.name, song.lyrics, song.poster_url AS thumb, song.release_date, song.youtube_id, song.language, artist.name AS artistName, mp3.quality, mp3.urls FROM musicphreak.song INNER JOIN musicphreak.artist_songs ON artist_songs.song_id = song.id INNER JOIN musicphreak.artist ON artist.id = artist_songs.artist_id INNER JOIN musicphreak.mp3 on mp3.song_id = song.id WHERE musicphreak.mp3.quality = $1", [q]);
     const count = await db.query("select count(*) from musicphreak.song");
 
-    res.send([result.rows, count.rows]);
+    res.send({"songs": result.rows, "total": count.rows});
 });
 
 

@@ -2,13 +2,15 @@ import Express from "express";
 import songs from "./songs";
 import artists from "./artists";
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 const app = Express();
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.set("env", process.env.NODE_ENV || "development");
 
